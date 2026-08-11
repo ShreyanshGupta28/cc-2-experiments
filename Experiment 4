@@ -1,0 +1,70 @@
+Experiment 4.1: Middle of Linked List (Leetcode Problem-876)
+Aim: To find the middle node of a singly linked list using the slow and fast pointer technique.
+
+Algorithm:
+1. Initialize two pointers slow and fast at the head.
+2. Move slow one step at a time.
+3. Move fast two steps at a time.
+4. Continue until fast reaches the end of the list.
+5. When the loop ends, slow points to the middle node.
+6. Return slow.
+
+Code:
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        ListNode* slow = head;
+    ListNode* fast = head;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+    }
+};
+
+
+Experiment 4.2: Palindrome Linked List (Leetcode Problem-234)
+Aim: To check whether a singly linked list is a palindrome by comparing its elements from the beginning and end.
+
+Algorithm:
+1. Initialize an empty stack st.
+2. Traverse the linked list and push every node's value into the stack.
+3. Traverse the linked list again from the head.
+4. Compare each node's value with the top value of the stack.
+5. If any values are different, return false.
+6. Pop the top element after each comparison.
+7. If all values match, return true.
+
+Code:
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+
+        stack<int> st;
+        ListNode* temp = head;
+
+        // Put all values into stack
+        while (temp != NULL) {
+            st.push(temp->val);
+            temp = temp->next;
+        }
+
+        // Compare linked list with stack
+        temp = head;
+
+        while (temp != NULL) {
+
+            if (temp->val != st.top()) {
+                return false;
+            }
+
+            st.pop();
+            temp = temp->next;
+        }
+
+        return true;
+    }
+};
