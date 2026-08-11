@@ -1,0 +1,41 @@
+Experiment 3.1: Implement Queue using Stacks (Leetcode Problem-232)
+Aim: To implement a Queue using two Stacks and perform FIFO operations such as push, pop, peek, and empty.
+
+Algorithm:
+1. Initialize two stacks s1 and s2.
+2. Push(x):
+     Move all elements from s1 to s2.
+     Push x into s1.
+     Move all elements back from s2 to s1.
+     This keeps the first inserted element on top of s1.
+3. Pop():
+     Remove and return the top element of s1.
+4.Peek():
+     Return the top element of s1 without removing it.
+5.Empty():
+     Check whether s1 is empty.
+6.Thus, s1 maintains the FIFO order of the queue.
+
+Code:
+class MyQueue {
+public:
+    stack<int> s1, s2;
+
+    MyQueue() {
+        
+    }
+    
+    void push(int x) {
+        while (!s1.empty()) {
+            s2.push(s1.top());
+            s1.pop();
+        }
+
+        s1.push(x);
+
+        while (!s2.empty()) {
+            s1.push(s2.top());
+            s2.pop();
+        }
+    }
+    
